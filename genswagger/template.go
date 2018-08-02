@@ -48,6 +48,10 @@ var wktSchemas = map[string]schemaCore{
 		Type:   "boolean",
 		Format: "boolean",
 	},
+	".google.protobuf.BytesValue": schemaCore{
+		Type:   "string",
+		Format: "bytes",
+	},
 }
 
 func listEnumNames(enum *descriptor.Enum) (names []string) {
@@ -177,18 +181,20 @@ func findNestedMessagesAndEnumerations(message *descriptor.Message, reg *descrip
 		fieldType := t.GetTypeName()
 		// If the type is an empty string then it is a proto primitive
 		if fieldType != "" {
-			if _, ok := m[fieldType]; !ok {
-				msg, err := reg.LookupMsg("", fieldType)
-				if err != nil {
-					enum, err := reg.LookupEnum("", fieldType)
+			if _, ok := wktSchemas[fieldType]; !ok {
+				if _, ok := m[fieldType]; !ok {
+					msg, err := reg.LookupMsg("", fieldType)
 					if err != nil {
-						panic(err)
+						enum, err := reg.LookupEnum("", fieldType)
+						if err != nil {
+							panic(err)
+						}
+						e[fieldType] = enum
+						continue
 					}
-					e[fieldType] = enum
-					continue
+					m[fieldType] = msg
+					findNestedMessagesAndEnumerations(msg, reg, m, e)
 				}
-				m[fieldType] = msg
-				findNestedMessagesAndEnumerations(msg, reg, m, e)
 			}
 		}
 	}
