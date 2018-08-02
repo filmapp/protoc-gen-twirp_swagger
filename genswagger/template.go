@@ -50,7 +50,7 @@ var wktSchemas = map[string]schemaCore{
 	},
 	".google.protobuf.BytesValue": schemaCore{
 		Type:   "string",
-		Format: "bytes",
+		Format: "byte",
 	},
 }
 
