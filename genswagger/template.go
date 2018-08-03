@@ -243,11 +243,7 @@ func renderMessagesAsDefinition(messages messageMap, d swaggerDefinitionsObject,
 		for _, f := range msg.Fields {
 			fieldValue := schemaOfField(f, reg)
 			rawComments := fieldProtoComments(reg, msg, f)
-			r := strings.NewReplacer(
-				"[required]", "",
-				"\n", "",
-			)
-			comments := r.Replace(rawComments)
+			comments := strings.TrimSpace(strings.TrimPrefix(rawComments, "[required]"))
 			if err := updateSwaggerDataFromComments(&fieldValue, comments); err != nil {
 				panic(err)
 			}
