@@ -8,6 +8,7 @@ message Hat {
   // [required] The size of a hat should always be in inches.
   int32 size = 1;
 
+  // [required]
   // The color of a hat will never be 'invisible', but other than
   // that, anything is fair game.
   string color = 2;
