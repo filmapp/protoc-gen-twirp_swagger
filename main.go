@@ -8,7 +8,7 @@ import (
 	"os"
 	"strings"
 
-	"./genswagger"
+	"github.com/filmapp/protoc-gen-twirp_swagger/genswagger"
 	"github.com/golang/glog"
 	"github.com/golang/protobuf/proto"
 	plugin "github.com/golang/protobuf/protoc-gen-go/plugin"
