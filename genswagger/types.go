@@ -197,8 +197,6 @@ type swaggerSchemaObject struct {
 	Properties           *swaggerSchemaObjectProperties `json:"properties,omitempty"`
 	AdditionalProperties *swaggerSchemaObject           `json:"additionalProperties,omitempty"`
 
-	Required []string `json:"required,omitempty"`
-
 	Description string `json:"description,omitempty"`
 	Title       string `json:"title,omitempty"`
 
