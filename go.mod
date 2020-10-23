@@ -1,4 +1,4 @@
-module github.com/elliots/protoc-gen-twirp_swagger
+module github.com/filmapp/protoc-gen-twirp_swagger
 
 go 1.12
 
